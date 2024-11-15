@@ -36,12 +36,13 @@ namespace Pariwisata
             }
             else if (userRole == "User")
             {
-                label1.Text = $"Welcome {userName}";               
+                label1.Text = $"Welcome {userName}";
             }
             else if (userRole == "guest")
             {
-                label1.Text = "Welcome Guest";               
-            } else if (userRole == "Pegawai")
+                label1.Text = "Welcome Guest";
+            }
+            else if (userRole == "Pegawai")
             {
                 label1.Text = $"Welcome {userName}";
             }
@@ -73,7 +74,7 @@ namespace Pariwisata
             this.panel2.Controls.Add(f);
             this.panel2.Tag = f;
             f.Show();
-        }              
+        }
 
         private void Home_Click(object sender, EventArgs e)
         {
@@ -87,12 +88,12 @@ namespace Pariwisata
             Form1 form1 = new Form1();
             form1.Show();
             this.Hide();
-        }       
+        }
 
         private void UserLocWisata_Click(object sender, EventArgs e)
         {
             UserLocWisata userLocWisata = new UserLocWisata(userRole);
             loadForm(userLocWisata);
-        }
+        }        
     }
 }

@@ -66,7 +66,7 @@
             // 
             // TampilData
             // 
-            TampilData.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            TampilData.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             TampilData.BackColor = SystemColors.Control;
             TampilData.Location = new Point(0, 42);
             TampilData.Name = "TampilData";

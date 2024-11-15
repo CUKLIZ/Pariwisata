@@ -31,7 +31,8 @@ namespace Pariwisata
 
         private void ShowLocationDetail(int IdLokasi)
         {
-            MessageBox.Show("Lokasi ID: " + IdLokasi);           
+            //MessageBox.Show("Lokasi ID: " + IdLokasi);                      
+
             LocDetail locDetail = new LocDetail(IdLokasi);
             locDetail.Show();
         }
@@ -141,8 +142,13 @@ namespace Pariwisata
         private void Add_Click(object sender, EventArgs e)
         {
             MasterLocWisata masterLocWisata = new MasterLocWisata();
+            masterLocWisata.OnLocationAdded += () =>
+            {
+                // Hapus semua data di TampilData dan tampilkan data baru
+                TampilData.Controls.Clear();
+                TampilLokasi();
+            };
             masterLocWisata.Show();
-            //this.Hide();
         }
     }
 }
