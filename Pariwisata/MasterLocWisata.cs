@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,26 @@ namespace Pariwisata
         }
         SqlConnection conn = new SqlConnection("Data Source=Tamara-Desktop\\SQLEXPRESS;Initial Catalog=Pariwisata;Integrated Security=True;");
 
+        // Agar Gambar Ukuranya Tidak Besar Cuy
+        private Image CompressImage(Image image, int maxWidth, int maxHeight)
+        {
+            // Menghitung dimensi thumbnail berdasarkan ukuran maksimum
+            int width = image.Width;
+            int height = image.Height;
+
+            float ratioX = (float)maxWidth / width;
+            float ratioY = (float)maxHeight / height;
+
+            float ratio = Math.Min(ratioX, ratioY);
+
+            int newWidth = (int)(width * ratio);
+            int newHeight = (int)(height * ratio);
+
+            // Mengubah ukuran gambar menjadi thumbnail
+            return new Bitmap(image, newWidth, newHeight);
+        }
+
+
         private void PilihGambar_Click_1(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -34,9 +55,13 @@ namespace Pariwisata
         // Convert Gambar Ke Binary
         private byte[] ConvertImageToByner(Image image)
         {
+            // Untuk Mengkompres Gambar
+            Image compressedImage = CompressImage(image, 200, 200);
+
             using (MemoryStream ms = new MemoryStream())
             {
-                image.Save(ms, image.RawFormat);
+                //image.Save(ms, image.RawFormat);
+                compressedImage.Save(ms, ImageFormat.Jpeg); // Di Simpan Sebagai JPEG
                 return ms.ToArray();
             }
         }

@@ -60,6 +60,7 @@ namespace Pariwisata
             // Untuk Menutup Ketika Area Gambar Di Click
             ImageForm.Click += (s, e) => ImageForm.Close();
             LargePictureBox.Click += (s, e) => ImageForm.Close();
+            ImageForm.FormClosed += (s, e) => image.Dispose();
 
             ImageForm.Controls.Add(LargePictureBox);
             ImageForm.ShowDialog();
@@ -72,6 +73,9 @@ namespace Pariwisata
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("SELECT IdLokasi, NamaLokasi, Gambar FROM Lokasi", conn);
                 SqlDataReader reader = cmd.ExecuteReader();
+
+                // Hapus Semua Control Lama
+                TampilData.Controls.Clear();
 
                 while (reader.Read())
                 {
@@ -136,6 +140,22 @@ namespace Pariwisata
             finally
             {
                 conn.Close();
+            }
+        }
+
+        private void TampilData_Scroll(object sender, ScrollEventArgs e)
+        {
+            // Mengelola data yang terlihat saat scroll
+            foreach (Control control in TampilData.Controls)
+            {
+                if (TampilData.ClientRectangle.IntersectsWith(control.ClientRectangle))
+                {
+                    control.Visible = true;
+                }
+                else
+                {
+                    control.Visible = false;
+                }
             }
         }
 

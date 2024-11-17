@@ -38,7 +38,6 @@
             button2 = new Button();
             UserLocWisata = new Button();
             panel2 = new Panel();
-            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             panel1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -173,7 +172,7 @@
             UserLocWisata.Name = "UserLocWisata";
             UserLocWisata.Size = new Size(126, 28);
             UserLocWisata.TabIndex = 8;
-            UserLocWisata.Text = "Lokasi Wisata";
+            UserLocWisata.Text = " Lokasi Wisata";
             UserLocWisata.UseVisualStyleBackColor = true;
             UserLocWisata.Click += UserLocWisata_Click;
             // 
@@ -186,7 +185,6 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(849, 529);
             panel2.TabIndex = 1;
-            //panel2.Paint += panel2_Paint;
             // 
             // HomePage
             // 
@@ -216,7 +214,6 @@
         private Label label1;
         private Label label2;
         private Button Home;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Label label3;
         private Button button2;
         private Button UserLocWisata;
