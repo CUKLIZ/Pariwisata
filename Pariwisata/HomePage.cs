@@ -15,13 +15,21 @@ namespace Pariwisata
     {
         private string userRole;
         private string userName;
-        public HomePage(string role, string Name)
+        private int userId;
+
+        public static HomePage homePage { get; private set; }
+        public object CurrentUserId { get; internal set; }
+
+        public HomePage(string role, string Name, int IdPelanggan)
         {
             InitializeComponent();
             userRole = role;
             userName = Name;
+            userId = IdPelanggan;
+
             Login();
 
+            homePage = this;
             this.Load += new System.EventHandler(this.HomePage_Load);
         }
 
@@ -87,12 +95,13 @@ namespace Pariwisata
         {
             Form1 form1 = new Form1();
             form1.Show();
+            this.Close();
             this.Hide();
         }
 
         private void UserLocWisata_Click(object sender, EventArgs e)
         {
-            UserLocWisata userLocWisata = new UserLocWisata(userRole);
+            UserLocWisata userLocWisata = new UserLocWisata(userRole, userId);
             loadForm(userLocWisata);
         }        
     }

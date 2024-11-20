@@ -14,31 +14,46 @@ namespace Pariwisata
     public partial class UserLocWisata : Form
     {
         private string userRole;
-
-        public UserLocWisata(string userRole)
+        private int IdPelanggan;
+        public UserLocWisata(string userRole, int IdPelanggan)
         {
             InitializeComponent();
 
+            this.userRole = userRole;
+            this.IdPelanggan = IdPelanggan;
+
             // Cek Yang Login
-            if (userRole != "Admin")
+            if (userRole != "Admin" && userRole != "Pegawai")
             {
                 Add.Visible = false;
             }
-
+            
             TampilLokasi();
         }
         SqlConnection conn = new SqlConnection("Data Source=Tamara-Desktop\\SQLEXPRESS;Initial Catalog=Pariwisata;Integrated Security=True;");
 
         private void ShowLocationDetail(int IdLokasi)
         {
-            //MessageBox.Show("Lokasi ID: " + IdLokasi);                      
+            //MessageBox.Show("Lokasi ID: " + IdLokasi);
+            //MessageBox.Show($"Current User Role: {userRole}");           
 
-            LocDetail locDetail = new LocDetail(IdLokasi);
+            LocDetail locDetail = new(IdLokasi, userRole, IdPelanggan);
+
+            locDetail.OnLocationAdded += () =>
+            {
+                // Hapus semua data di TampilData dan tampilkan data baru
+                TampilData.Controls.Clear();
+                TampilLokasi();
+            };
+
             locDetail.Show();
         }
 
         private void ShowImage(Image image)
         {
+            // Untuk Menghindari Dispose
+            Image copiedImage = (Image)image.Clone();
+
             // Untuk Menampilkan Gambar
             Form ImageForm = new Form
             {
@@ -60,8 +75,11 @@ namespace Pariwisata
             // Untuk Menutup Ketika Area Gambar Di Click
             ImageForm.Click += (s, e) => ImageForm.Close();
             LargePictureBox.Click += (s, e) => ImageForm.Close();
-            ImageForm.FormClosed += (s, e) => image.Dispose();
-
+            ImageForm.FormClosed += (s, e) =>
+            {
+                // Hapus Salinan Gambar
+                copiedImage.Dispose();
+            };
             ImageForm.Controls.Add(LargePictureBox);
             ImageForm.ShowDialog();
         }

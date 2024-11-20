@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 namespace Pariwisata
 {
     public partial class Form1 : Form
-    {
+    {        
         public Form1()
         {
             InitializeComponent();
@@ -30,6 +30,7 @@ namespace Pariwisata
         {
             string role = "";
             string userName = "";
+            int idPelanggan = 0;
 
             try
             {
@@ -52,7 +53,7 @@ namespace Pariwisata
                 // Cek Role User
                 if (string.IsNullOrEmpty(role))
                 {
-                    SqlCommand cmdd = new SqlCommand("SELECT 'User' AS Role, Nama FROM Pelangan WHERE Username = @Username AND Password = @Password", conn);
+                    SqlCommand cmdd = new SqlCommand("SELECT 'User' AS Role, IdPelanggan ,Nama FROM Pelangan WHERE Username = @Username AND Password = @Password", conn);
                     //cmdd.Parameters.AddWithValue("@Nama", textBox1.Text);
                     cmdd.Parameters.AddWithValue("@Username", textBox1.Text);
                     cmdd.Parameters.AddWithValue("@Password", textBox2.Text);
@@ -63,6 +64,7 @@ namespace Pariwisata
                     {
                         role = readers["Role"].ToString();
                         userName = readers["Nama"].ToString();
+                        idPelanggan = Convert.ToInt32(readers["IdPelanggan"]);
                     }
                     readers.Close();
                 }
@@ -70,7 +72,7 @@ namespace Pariwisata
                 // Masuk ke HomePage
                 if (!string.IsNullOrEmpty(role))
                 {
-                    HomePage HomePage = new HomePage(role, userName);
+                    HomePage HomePage = new HomePage(role, userName, idPelanggan);
                     HomePage.Show();
                     this.Hide();
                 }
@@ -84,7 +86,7 @@ namespace Pariwisata
                 MessageBox.Show(ex.Message);
             }
             finally
-            {
+            {                
                 conn.Close();
             }
         }
@@ -111,7 +113,8 @@ namespace Pariwisata
         {
             string role = "guest";
             string userName = "guest";
-            HomePage homePage = new HomePage(role, userName);
+            int idPelanggan = 0;
+            HomePage homePage = new HomePage(role, userName, idPelanggan);
             homePage.Show();
             this.Hide();
         }

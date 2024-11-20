@@ -48,6 +48,8 @@
             Edit = new ReaLTaiizor.Controls.Button();
             Delete = new ReaLTaiizor.Controls.Button();
             UbahGambar = new ReaLTaiizor.Controls.Button();
+            Pesan = new ReaLTaiizor.Controls.Button();
+            BerapaPesan = new ReaLTaiizor.Controls.AloneTextBox();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             panel5.SuspendLayout();
@@ -281,6 +283,7 @@
             Edit.TabIndex = 59;
             Edit.Text = "Edit";
             Edit.TextAlignment = StringAlignment.Center;
+            Edit.Click += Edit_Click;
             // 
             // Delete
             // 
@@ -301,6 +304,7 @@
             Delete.TabIndex = 60;
             Delete.Text = "Delete";
             Delete.TextAlignment = StringAlignment.Center;
+            Delete.Click += Delete_Click;
             // 
             // UbahGambar
             // 
@@ -321,12 +325,53 @@
             UbahGambar.TabIndex = 61;
             UbahGambar.Text = "Ubah Gambar";
             UbahGambar.TextAlignment = StringAlignment.Center;
+            UbahGambar.Click += UbahGambar_Click;
+            // 
+            // Pesan
+            // 
+            Pesan.BackColor = Color.Transparent;
+            Pesan.BorderColor = Color.FromArgb(32, 34, 37);
+            Pesan.Cursor = Cursors.Hand;
+            Pesan.EnteredBorderColor = Color.FromArgb(165, 37, 37);
+            Pesan.EnteredColor = Color.FromArgb(32, 34, 37);
+            Pesan.Font = new Font("Microsoft Sans Serif", 12F);
+            Pesan.Image = null;
+            Pesan.ImageAlign = ContentAlignment.MiddleLeft;
+            Pesan.InactiveColor = Color.FromArgb(0, 117, 214);
+            Pesan.Location = new Point(578, 351);
+            Pesan.Name = "Pesan";
+            Pesan.PressedBorderColor = Color.FromArgb(165, 37, 37);
+            Pesan.PressedColor = Color.FromArgb(165, 37, 37);
+            Pesan.Size = new Size(195, 26);
+            Pesan.TabIndex = 62;
+            Pesan.Text = "Pesan";
+            Pesan.TextAlignment = StringAlignment.Center;
+            Pesan.Click += Pesan_Click;
+            // 
+            // BerapaPesan
+            // 
+            BerapaPesan.BackColor = Color.Transparent;
+            BerapaPesan.EnabledCalc = true;
+            BerapaPesan.Font = new Font("Segoe UI", 9F);
+            BerapaPesan.ForeColor = Color.FromArgb(124, 133, 142);
+            BerapaPesan.Location = new Point(578, 304);
+            BerapaPesan.MaxLength = 32767;
+            BerapaPesan.MultiLine = false;
+            BerapaPesan.Name = "BerapaPesan";
+            BerapaPesan.ReadOnly = false;
+            BerapaPesan.Size = new Size(195, 29);
+            BerapaPesan.TabIndex = 63;
+            BerapaPesan.Text = "Berapa Ticket";
+            BerapaPesan.TextAlign = HorizontalAlignment.Left;
+            BerapaPesan.UseSystemPasswordChar = false;
             // 
             // LocDetail
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(BerapaPesan);
+            Controls.Add(Pesan);
             Controls.Add(UbahGambar);
             Controls.Add(Delete);
             Controls.Add(Edit);
@@ -377,5 +422,7 @@
         private ReaLTaiizor.Controls.Button Edit;
         private ReaLTaiizor.Controls.Button Delete;
         private ReaLTaiizor.Controls.Button UbahGambar;
+        private ReaLTaiizor.Controls.Button Pesan;
+        private ReaLTaiizor.Controls.AloneTextBox BerapaPesan;
     }
 }
