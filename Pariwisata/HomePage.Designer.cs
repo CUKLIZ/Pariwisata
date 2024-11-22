@@ -38,6 +38,7 @@
             button2 = new Button();
             UserLocWisata = new Button();
             panel2 = new Panel();
+            Pesanan = new Button();
             panel1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -122,6 +123,7 @@
             flowLayoutPanel1.Controls.Add(Home);
             flowLayoutPanel1.Controls.Add(button2);
             flowLayoutPanel1.Controls.Add(UserLocWisata);
+            flowLayoutPanel1.Controls.Add(Pesanan);
             flowLayoutPanel1.Dock = DockStyle.Left;
             flowLayoutPanel1.Location = new Point(0, 36);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -186,6 +188,23 @@
             panel2.Size = new Size(849, 529);
             panel2.TabIndex = 1;
             // 
+            // Pesanan
+            // 
+            Pesanan.Cursor = Cursors.Hand;
+            Pesanan.FlatAppearance.BorderSize = 0;
+            Pesanan.FlatAppearance.MouseDownBackColor = Color.FromArgb(76, 201, 254);
+            Pesanan.FlatAppearance.MouseOverBackColor = Color.FromArgb(76, 201, 254);
+            Pesanan.FlatStyle = FlatStyle.Flat;
+            Pesanan.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Pesanan.ForeColor = Color.FromArgb(245, 244, 179);
+            Pesanan.Location = new Point(3, 105);
+            Pesanan.Name = "Pesanan";
+            Pesanan.Size = new Size(117, 28);
+            Pesanan.TabIndex = 9;
+            Pesanan.Text = "Pesanan";
+            Pesanan.UseVisualStyleBackColor = true;
+            Pesanan.Click += Pesanan_Click;
+            // 
             // HomePage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -218,5 +237,6 @@
         private Button button2;
         private Button UserLocWisata;
         private ReaLTaiizor.Controls.NightControlBox nightControlBox1;
+        private Button Pesanan;
     }
 }

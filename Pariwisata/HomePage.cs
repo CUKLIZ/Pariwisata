@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReaLTaiizor.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -74,14 +75,30 @@ namespace Pariwisata
         // Untuk Pindah Halamn
         public void loadForm(object Form)
         {
+            ClearPanel();
+
             if (this.panel2.Controls.Count > 0)
+            {
+                // Dispose control sebelumnya
+                this.panel2.Controls[0].Dispose();
                 this.panel2.Controls.RemoveAt(0);
+            }
+
             Form f = Form as Form;
             f.TopLevel = false;
             f.Dock = DockStyle.Fill;
             this.panel2.Controls.Add(f);
             this.panel2.Tag = f;
             f.Show();
+        }
+
+        private void ClearPanel()
+        {
+            foreach (Control control in panel2.Controls)
+            {
+                control.Dispose();
+            }
+            panel2.Controls.Clear();
         }
 
         private void Home_Click(object sender, EventArgs e)
@@ -103,6 +120,12 @@ namespace Pariwisata
         {
             UserLocWisata userLocWisata = new UserLocWisata(userRole, userId);
             loadForm(userLocWisata);
-        }        
+        }
+
+        private void Pesanan_Click(object sender, EventArgs e)
+        {
+            UserPesanan userPesanan = new UserPesanan(userRole, userId);
+            loadForm(userPesanan);
+        }
     }
 }

@@ -280,8 +280,8 @@ namespace Pariwisata
                         SqlCommand cmd = new SqlCommand("INSERT INTO Pembelian (IdPelanggan, TanggalPembelian, TotalHarga) OUTPUT " +
                             "INSERTED.IdPembelian VALUES (@IdPelanggan, GETDATE(), @TotalHarga)", conn);
 
-                        cmd.Parameters.AddWithValue("@IdPelanggan", IdPelanggan); // Pastikan tipe int
-                        cmd.Parameters.AddWithValue("@TotalHarga", Convert.ToDecimal(TotalHarga)); // Pastikan tipe decimal
+                        cmd.Parameters.AddWithValue("@IdPelanggan", IdPelanggan); 
+                        cmd.Parameters.AddWithValue("@TotalHarga", Convert.ToDecimal(TotalHarga)); 
 
                         int IdPembelian = (int)cmd.ExecuteScalar();
 
@@ -289,13 +289,27 @@ namespace Pariwisata
                         SqlCommand cmdd = new SqlCommand("INSERT INTO DetailPembelian (IdPembelian, IdLokasi, JumlahTiket, HargaPerTiket, TotalHarga)" +
                             "VALUES (@IdPembelian, @IdLokasi, @JumlahTiket, @HargaPerTiket, @TotalHarga)", conn);
 
-                        cmdd.Parameters.AddWithValue("@IdPembelian", IdPembelian); // Penamaan parameter diperbaiki
+                        cmdd.Parameters.AddWithValue("@IdPembelian", IdPembelian); 
                         cmdd.Parameters.AddWithValue("@IdLokasi", idLokasi);
                         cmdd.Parameters.AddWithValue("@JumlahTiket", jumlahTiket);
                         cmdd.Parameters.AddWithValue("@HargaPerTiket", hargaPerTiket);
                         cmdd.Parameters.AddWithValue("@TotalHarga", TotalHarga);
 
                         cmdd.ExecuteNonQuery();
+
+                        // Ke Pesanan
+                        SqlCommand cmdPesanan = new SqlCommand("INSERT INTO Pesanan (IdLokasi, IdPelanggan, JumlahTiket, TotalHarga)" +
+                            "VALUES (@IdLokasi, @IdPelanggan, @JumlahTiket, @TotalHarga)", conn);
+
+                        cmdPesanan.Parameters.AddWithValue("@IdLokasi", idLokasi);
+                        cmdPesanan.Parameters.AddWithValue("@IdPelanggan", IdPelanggan);
+                        cmdPesanan.Parameters.AddWithValue("@JumlahTiket", jumlahTiket);
+                        cmdPesanan.Parameters.AddWithValue("@TotalHarga", TotalHarga);
+
+                        cmdPesanan.ExecuteNonQuery();                        
+
+                        //string Rupiah = TotalHarga.ToString("C", new CultureInfo("id-ID"));
+
                         MessageBox.Show("Berhasil Memesan");
 
                     } catch (Exception ex)
